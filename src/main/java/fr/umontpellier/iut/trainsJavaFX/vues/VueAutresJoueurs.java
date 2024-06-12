@@ -1,6 +1,9 @@
 package fr.umontpellier.iut.trainsJavaFX.vues;
 
-import javafx.scene.layout.Pane;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.layout.VBox;
+
+import java.io.IOException;
 
 /**
  * Cette classe présente les éléments des joueurs autres que le joueur courant,
@@ -8,6 +11,15 @@ import javafx.scene.layout.Pane;
  * <p>
  * On y définit les bindings sur le joueur courant, ainsi que le listener à exécuter lorsque ce joueur change
  */
-public class VueAutresJoueurs extends Pane {
-
+public class VueAutresJoueurs extends VBox {
+    public VueAutresJoueurs() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/autresJoueurs.fxml"));
+            loader.setRoot(this);
+            loader.setController(this);
+            loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

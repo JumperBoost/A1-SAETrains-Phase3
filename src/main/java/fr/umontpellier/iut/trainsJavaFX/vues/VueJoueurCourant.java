@@ -143,7 +143,7 @@ public class VueJoueurCourant extends VBox {
     }
 
     public void creerBindings() {
-        vueDuJeu = (VueDuJeu) getParent();
+        vueDuJeu = (VueDuJeu) getParent().getParent();
 
         passer.setOnMouseClicked(actionPasserParDefaut);
         // Affichage des cartes

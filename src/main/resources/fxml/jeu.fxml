@@ -4,30 +4,37 @@
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 
-<fx:root type="BorderPane" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root type="BorderPane" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1">
     <top>
         <HBox alignment="CENTER_LEFT">
             <Label fx:id="nomJoueur" prefWidth="120" style="-fx-text-fill: red">
-                <font>
-                    <Font name="Comic Sans MS" size="30.0" />
-                </font>
                 <padding>
                     <Insets left="10.0" />
                 </padding>
             </Label>
-            <Label fx:id="instruction">
-                <font>
-                    <Font name="Comic Sans MS" size="24.0" />
-                </font>
-            </Label>
+            <Label fx:id="instruction" />
         </HBox>
     </top>
+    <left>
+        <HBox>
+            <VueReserve fx:id="reserve" />
+            <Separator orientation="VERTICAL" />
+        </HBox>
+    </left>
     <center>
         <VuePlateau fx:id="plateau" />
     </center>
+    <right>
+        <HBox>
+            <Separator orientation="VERTICAL" />
+            <VueAutresJoueurs fx:id="autresJoueurs" />
+        </HBox>
+    </right>
     <bottom>
-        <VueJoueurCourant fx:id="joueurCourant" />
+        <VBox>
+            <Separator />
+            <VueJoueurCourant fx:id="joueurCourant" />
+        </VBox>
     </bottom>
 </fx:root>

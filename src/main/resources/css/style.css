@@ -5,6 +5,64 @@
     -fx-font-size: 20;
 }
 
+Separator *.line {
+    -fx-border-style: dashed;
+    -fx-border-color: black;
+    -fx-border-width: 2;
+    -fx-background-color: yellow;
+}
+
+/**
+ * Header
+ */
+
+top > HBox {
+    -fx-font-family: "Comic Sans MS";
+}
+
+#nomJoueur {
+    -fx-font-size: 30;
+}
+
+#instruction {
+    -fx-font-size: 24;
+}
+
+/**
+ * Plateau
+ */
+
 SVGPath {
     -fx-fill: transparent; // Attention ne pas choisir none
+}
+
+#plateau {
+    -fx-background-color: #26292e;
+}
+
+/**
+ * Joueur courant
+ */
+
+Label {
+    -fx-font-family: Impact;
+    -fx-font-size: 16;
+}
+
+.cardsBox {
+    -fx-pref-width: 300;
+    -fx-spacing: 10;
+}
+
+#cartesEnMain, #cartesEnJeu, #cartesRecues {
+    -fx-pref-height: 105;
+}
+
+.cardsBox > HBox > Label {
+    -fx-font-size: 18;
+}
+
+VueCarte {
+    -fx-border-color: black;
+    -fx-border-width: 1;
 }

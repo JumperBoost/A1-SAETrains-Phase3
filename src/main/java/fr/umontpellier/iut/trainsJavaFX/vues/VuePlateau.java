@@ -6,7 +6,9 @@ import fr.umontpellier.iut.trainsJavaFX.mecanique.Joueur;
 import fr.umontpellier.iut.trainsJavaFX.mecanique.plateau.Plateau;
 import fr.umontpellier.iut.trainsJavaFX.mecanique.plateau.Tuile;
 import fr.umontpellier.iut.trainsJavaFX.mecanique.plateau.TuileVille;
+import javafx.beans.binding.Bindings;
 import javafx.beans.binding.DoubleBinding;
+import javafx.beans.binding.NumberBinding;
 import javafx.collections.SetChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -24,7 +26,9 @@ import javafx.scene.shape.SVGPath;
 import javafx.scene.transform.Scale;
 
 import java.io.IOException;
+import java.util.AbstractMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Cette classe présente les tuiles sur le plateau.
@@ -64,10 +68,17 @@ public class VuePlateau extends Pane {
         construirePlateau();
     }
 
+    private Map.Entry<NumberBinding, NumberBinding> getTailleBindings() {
+        VueDuJeu vueDuJeu = (VueDuJeu) getParent();
+        NumberBinding widthBinding = Bindings.subtract(vueDuJeu.widthProperty(), ((Region) vueDuJeu.getLeft()).widthProperty()).subtract(((Region) vueDuJeu.getRight()).widthProperty());
+        NumberBinding heightBinding = Bindings.subtract(vueDuJeu.heightProperty(), ((Region) vueDuJeu.getTop()).heightProperty()).subtract(((Region) vueDuJeu.getBottom()).heightProperty());
+        return new AbstractMap.SimpleEntry<>(widthBinding, heightBinding);
+    }
+
     public void definirScaleTransformation() {
-        Region conteneurParent = (Region) getParent();
-        mapVille.fitWidthProperty().addListener((obs, oldVal, newVal) -> definirScalefacteur(conteneurParent.getWidth(), conteneurParent.getHeight()));
-        mapVille.fitHeightProperty().addListener((obs, oldVal, newVal) -> definirScalefacteur(conteneurParent.getWidth(), conteneurParent.getHeight()));
+        Map.Entry<NumberBinding, NumberBinding> tailleBindings = getTailleBindings();
+        mapVille.fitWidthProperty().addListener((obs, oldVal, newVal) -> definirScalefacteur((double) tailleBindings.getKey().getValue(), (double) tailleBindings.getValue().getValue()));
+        mapVille.fitHeightProperty().addListener((obs, oldVal, newVal) -> definirScalefacteur((double) tailleBindings.getKey().getValue(), (double) tailleBindings.getValue().getValue()));
     }
 
     private void definirScalefacteur(double largeurScene, double hauteurScene) {
@@ -77,8 +88,9 @@ public class VuePlateau extends Pane {
     }
 
     private void bindRedimensionEtCentragePlateau() {
-        mapVille.fitWidthProperty().bind(((Region) getParent()).widthProperty());
-        mapVille.fitHeightProperty().bind(((Region) getParent()).heightProperty());
+        Map.Entry<NumberBinding, NumberBinding> tailleBindings = getTailleBindings();
+        mapVille.fitWidthProperty().bind(tailleBindings.getKey());
+        mapVille.fitHeightProperty().bind(tailleBindings.getValue());
         mapVille.layoutXProperty().bind(new DoubleBinding() { // Pour maintenir le plateau au centre
             {
                 super.bind(widthProperty(),heightProperty());

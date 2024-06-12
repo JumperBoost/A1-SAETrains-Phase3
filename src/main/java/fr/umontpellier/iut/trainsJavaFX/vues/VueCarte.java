@@ -1,14 +1,10 @@
 package fr.umontpellier.iut.trainsJavaFX.vues;
 
 import fr.umontpellier.iut.trainsJavaFX.ICarte;
-import fr.umontpellier.iut.trainsJavaFX.mecanique.cartes.Carte;
 import javafx.event.EventHandler;
-import javafx.scene.Node;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
-
-import java.util.Objects;
 
 /**
  * Cette classe représente la vue d'une carte.
@@ -18,7 +14,7 @@ import java.util.Objects;
 public class VueCarte extends StackPane {
 
     private final ICarte carte;
-    private ImageView imageView;
+    private final ImageView imageView;
 
     public VueCarte(ICarte carte) {
         this.carte = carte;
