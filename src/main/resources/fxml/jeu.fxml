@@ -7,14 +7,17 @@
 
 <fx:root type="BorderPane" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1">
     <top>
-        <HBox alignment="CENTER_LEFT">
-            <Label fx:id="nomJoueur" prefWidth="120" style="-fx-text-fill: red">
-                <padding>
-                    <Insets left="10.0" />
-                </padding>
-            </Label>
-            <Label fx:id="instruction" />
-        </HBox>
+        <VBox>
+            <HBox alignment="CENTER_LEFT">
+                <Label fx:id="nomJoueur" prefWidth="120" style="-fx-text-fill: red">
+                    <padding>
+                        <Insets left="10.0" />
+                    </padding>
+                </Label>
+                <Label fx:id="instruction" />
+            </HBox>
+            <Separator />
+        </VBox>
     </top>
     <left>
         <HBox>
