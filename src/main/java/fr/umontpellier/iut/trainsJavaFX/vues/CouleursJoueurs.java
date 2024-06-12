@@ -12,4 +12,11 @@ public class CouleursJoueurs {
             CouleurJoueur.VERT, "#2CCDB4"
     );
 
+    public static Map<CouleurJoueur, String> nomCouleursCubeJoueur = Map.of(
+            CouleurJoueur.JAUNE, "cube_yellow.png",
+            CouleurJoueur.ROUGE, "cube_red.png",
+            CouleurJoueur.BLEU, "cube_blue.png",
+            CouleurJoueur.VERT, "cube_green.png"
+    );
+
 }

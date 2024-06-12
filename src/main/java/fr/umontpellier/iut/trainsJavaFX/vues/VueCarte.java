@@ -18,39 +18,27 @@ import java.util.Objects;
 public class VueCarte extends StackPane {
 
     private final ICarte carte;
-    private ImageView imageCarte;
+    private ImageView imageView;
 
     public VueCarte(ICarte carte) {
         this.carte = carte;
-        ImageView iv = new ImageView("images/cartes/" + carte.getNom().replace(" ", "_").toLowerCase() + ".jpg");
-        iv.setFitWidth(iv.getImage().getWidth() / 4);
-        iv.setFitHeight(iv.getImage().getHeight() / 4);
-        //set(iv);
-        setStyle("-fx-background-color: transparent");
-
+        imageView = new ImageView(String.valueOf(getClass().getClassLoader()
+                .getResource("images/cartes/" + carte.getNom().replaceAll(" ", "_").toLowerCase() + ".jpg")));
+        imageView.setFitWidth(imageView.getImage().getWidth() / 5);
+        imageView.setFitHeight(imageView.getImage().getHeight() / 5);
+        getChildren().add(imageView);
     }
 
     public void setCarteChoisieListener(EventHandler<MouseEvent> quandCarteEstChoisie) {
         setOnMouseClicked(quandCarteEstChoisie);
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        VueCarte vueCarte = (VueCarte) o;
-        return Objects.equals(carte, vueCarte.carte);
+    public ICarte getCarte() {
+        return carte;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(carte);
+    public ImageView getImageView() {
+        return imageView;
     }
-
-/*    public boolean estEgal(Carte carte) {
-        if(carte.equals(carte))
-            return true;
-        return false;
-    }*/
 
 }

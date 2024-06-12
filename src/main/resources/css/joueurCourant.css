@@ -1,0 +1,26 @@
+#bottomBox {
+    -fx-padding: 10;
+}
+
+Label {
+    -fx-font-family: Impact;
+    -fx-font-size: 16;
+}
+
+.secondaryCardsBox {
+    -fx-pref-width: 300;
+    -fx-spacing: 10;
+}
+
+#cartesEnMain, #cartesEnJeu, #cartesRecues {
+    -fx-pref-height: 105;
+}
+
+.secondaryCardsBox > HBox > Label {
+    -fx-font-size: 18;
+}
+
+VueCarte {
+    -fx-border-color: black;
+    -fx-border-width: 1;
+}

@@ -6,7 +6,5 @@
 }
 
 SVGPath {
-    -fx-fill: transparent;
-    -fx-stroke: dodgerblue; // transparent
-    -fx-stroke-width: 3px;
+    -fx-fill: transparent; // Attention ne pas choisir none
 }
