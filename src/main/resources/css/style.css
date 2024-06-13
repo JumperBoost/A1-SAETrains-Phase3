@@ -66,3 +66,12 @@ VueCarte {
     -fx-border-color: black;
     -fx-border-width: 1;
 }
+
+/**
+ * vueAutresJoueurs
+ */
+
+#conteneurJoueursSuivant ImageView {
+    -fx-fit-to-height: 30;
+    -fx-fit-to-width: 30;
+}

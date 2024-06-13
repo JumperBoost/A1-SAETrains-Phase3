@@ -27,6 +27,8 @@ public class VueDuJeu extends BorderPane {
     @FXML
     private VueJoueurCourant joueurCourant;
     @FXML
+    private VueAutresJoueurs autresJoueurs;
+    @FXML
     private VueReserve reserve;
     @FXML
     private Label instruction;
@@ -50,6 +52,7 @@ public class VueDuJeu extends BorderPane {
         plateau.prefHeightProperty().bind(getScene().heightProperty());
         plateau.creerBindings();
         joueurCourant.creerBindings();
+        autresJoueurs.creerBinding();
         instruction.textProperty().bind(jeu.instructionProperty());
         minHeightProperty().bind(new DoubleBinding() {
             {
