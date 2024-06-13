@@ -11,4 +11,8 @@ public class VueResultats extends Pane {
         this.ihm = ihm;
     }
 
+    /*public void verifierFinPartie{
+
+    }*/
+
 }
