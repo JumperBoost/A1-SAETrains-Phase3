@@ -53,7 +53,7 @@ public class VueDuJeu extends BorderPane {
         instruction.textProperty().bind(jeu.instructionProperty());
         minHeightProperty().bind(new DoubleBinding() {
             {
-                super.bind(bottomProperty(), centerProperty(), topProperty());
+                super.bind(bottomProperty(), leftProperty(), topProperty());
             }
             @Override
             protected double computeValue() {
@@ -63,7 +63,7 @@ public class VueDuJeu extends BorderPane {
         });
         minWidthProperty().bind(new DoubleBinding() {
             {
-                super.bind(bottomProperty(), centerProperty(), topProperty());
+                super.bind(bottomProperty(), leftProperty(), topProperty());
             }
             @Override
             protected double computeValue() {
