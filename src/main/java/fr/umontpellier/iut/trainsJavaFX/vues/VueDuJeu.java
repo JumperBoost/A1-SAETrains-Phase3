@@ -1,6 +1,7 @@
 package fr.umontpellier.iut.trainsJavaFX.vues;
 
 import fr.umontpellier.iut.trainsJavaFX.IJeu;
+import javafx.beans.binding.DoubleBinding;
 import javafx.beans.binding.StringBinding;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -26,6 +27,10 @@ public class VueDuJeu extends BorderPane {
     @FXML
     private VueJoueurCourant joueurCourant;
     @FXML
+    private VueAutresJoueurs autresJoueurs;
+    @FXML
+    private VueReserve reserve;
+    @FXML
     private Label instruction;
     @FXML
     private Label nomJoueur;
@@ -47,7 +52,28 @@ public class VueDuJeu extends BorderPane {
         plateau.prefHeightProperty().bind(getScene().heightProperty());
         plateau.creerBindings();
         joueurCourant.creerBindings();
+        autresJoueurs.creerBinding();
         instruction.textProperty().bind(jeu.instructionProperty());
+        minHeightProperty().bind(new DoubleBinding() {
+            {
+                super.bind(bottomProperty(), leftProperty(), topProperty());
+            }
+            @Override
+            protected double computeValue() {
+                double taille = joueurCourant.heightProperty().get() + reserve.heightProperty().get() + nomJoueur.heightProperty().get();
+                return taille;
+            }
+        });
+        minWidthProperty().bind(new DoubleBinding() {
+            {
+                super.bind(bottomProperty(), leftProperty(), topProperty());
+            }
+            @Override
+            protected double computeValue() {
+                double taille = joueurCourant.widthProperty().get() + reserve.widthProperty().get() + nomJoueur.widthProperty().get();
+                return taille;
+            }
+        });
         nomJoueur.textProperty().bind(new StringBinding() {
             {
                 super.bind(jeu.joueurCourantProperty());
