@@ -1,6 +1,7 @@
 package fr.umontpellier.iut.trainsJavaFX.vues;
 
 import fr.umontpellier.iut.trainsJavaFX.IJoueur;
+import fr.umontpellier.iut.trainsJavaFX.mecanique.Jeu;
 import fr.umontpellier.iut.trainsJavaFX.mecanique.cartes.Carte;
 import fr.umontpellier.iut.trainsJavaFX.mecanique.cartes.ListeDeCartes;
 import javafx.beans.binding.Bindings;
@@ -149,6 +150,10 @@ public class VueJoueurCourant extends VBox {
         // Affichage des cartes
         vueDuJeu.getJeu().joueurCourantProperty().addListener((observableValue, oldValue, newValue) -> {
             IJoueur joueur = newValue;
+            // Vérification si la partie est fini
+            Jeu jeu = (Jeu) vueDuJeu.getJeu();
+            jeu.verifieSiFinDePartie();
+
             // Changement du joueur courant
             reinitialiserPaquetCartes(cartesEnMain, joueur.mainProperty());
             reinitialiserPaquetCartes(cartesEnJeu, joueur.cartesEnJeuProperty());

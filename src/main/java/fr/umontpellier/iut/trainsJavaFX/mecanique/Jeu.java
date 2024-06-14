@@ -79,7 +79,7 @@ public class Jeu implements IJeu {
         this.nomVille = plateau.getNomVille();
         this.tuiles = plateau.makeTuiles();
 
-        this.nbJetonsGare = 30;
+        this.nbJetonsGare = 1;
         this.cartesEcartees = new ListeDeCartes();
 
         // construction des piles de réserve
