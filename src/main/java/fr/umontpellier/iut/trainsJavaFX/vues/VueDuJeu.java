@@ -63,7 +63,7 @@ public class VueDuJeu extends BorderPane {
                 double taille = joueurCourant.heightProperty().get() + reserve.heightProperty().get() + nomJoueur.heightProperty().get();
                 return taille;
             }
-        });
+        });/*
         minWidthProperty().bind(new DoubleBinding() {
             {
                 super.bind(bottomProperty(), leftProperty(), topProperty(), centerProperty(), rightProperty());
@@ -73,7 +73,7 @@ public class VueDuJeu extends BorderPane {
                 double taille = joueurCourant.widthProperty().get() + reserve.widthProperty().get() + nomJoueur.widthProperty().get();
                 return taille;
             }
-        });
+        });*/
         nomJoueur.textProperty().bind(new StringBinding() {
             {
                 super.bind(jeu.joueurCourantProperty());

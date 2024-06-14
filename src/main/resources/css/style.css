@@ -71,7 +71,6 @@ VueCarte {
  * vueAutresJoueurs
  */
 
-#conteneurJoueursSuivant ImageView {
-    -fx-fit-to-height: 30;
-    -fx-fit-to-width: 30;
+VueAutresJoueurs {
+    -fx-background-color: rgba(128, 128, 128, 0.52);
 }

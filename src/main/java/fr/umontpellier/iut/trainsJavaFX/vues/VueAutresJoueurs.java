@@ -5,6 +5,7 @@ import fr.umontpellier.iut.trainsJavaFX.IJoueur;
 import fr.umontpellier.iut.trainsJavaFX.mecanique.CouleurJoueur;
 import fr.umontpellier.iut.trainsJavaFX.mecanique.Joueur;
 import javafx.beans.binding.Bindings;
+import javafx.beans.binding.DoubleBinding;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -99,5 +100,28 @@ public class VueAutresJoueurs extends VBox {
                 }
             }
         });
+        setMinSize(getMinHeight(), getMinWidth());
+        for (Node j : getChildren()){
+            VBox joueur = (VBox) j;
+            joueur.minHeightProperty().bind(new DoubleBinding() {
+                {
+                    super.bind(getParent().getScene().heightProperty());
+                }
+                @Override
+                protected double computeValue() {
+                    return heightProperty().getValue() / getChildren().size();
+                }
+            });
+            joueur.minWidthProperty().bind(new DoubleBinding() {
+                {
+                    super.bind(getParent().getScene().widthProperty());
+                }
+                @Override
+                protected double computeValue() {
+                    return widthProperty().getValue() / getChildren().size();
+                }
+            });
+        }
+
     }
 }
