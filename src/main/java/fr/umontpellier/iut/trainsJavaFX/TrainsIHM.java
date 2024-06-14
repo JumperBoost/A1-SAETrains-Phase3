@@ -21,6 +21,17 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
+import java.io.*;
+
+import javafx.application.*;
+import javafx.beans.binding.*;
+import javafx.beans.property.*;
+import javafx.scene.*;
+import javafx.scene.layout.*;
+import javafx.scene.media.*;
+import javafx.scene.paint.*;
+import javafx.stage.*;
+
 public class TrainsIHM extends Application {
     private VueChoixJoueurs vueChoixJoueurs;
     private Stage primaryStage;
@@ -63,6 +74,8 @@ public class TrainsIHM extends Application {
 
         Scene scene = new Scene(vueDuJeu, Screen.getPrimary().getBounds().getWidth() * DonneesGraphiques.pourcentageEcran, Screen.getPrimary().getBounds().getHeight() * DonneesGraphiques.pourcentageEcran); // la scene doit être créée avant de mettre en place les bindings
         vueDuJeu.creerBindings();
+        MediaPlayer musique = TrainsIHM.creerMusique("src/main/resources/musique/train_aventure.mp3");
+        vueDuJeu.getChildren().add(new MediaView(musique));
         jeu.run(); // le jeu doit être démarré après que les bindings ont été mis en place
 
         VueResultats vueResultats = new VueResultats(this);
@@ -79,7 +92,13 @@ public class TrainsIHM extends Application {
             this.arreterJeu();
             event.consume();
         });
+        musique.setAutoPlay(true);
         primaryStage.show();
+        musique.setCycleCount(MediaPlayer.INDEFINITE);
+        musique.play();
+
+
+
     }
 
     private final ListChangeListener<String> quandLesNomsJoueursSontDefinis = change -> {
@@ -103,6 +122,13 @@ public class TrainsIHM extends Application {
 
     public Stage getPrimaryStage() {
         return primaryStage;
+    }
+
+    public static MediaPlayer creerMusique(String path){
+        Media media = new Media(new File(path).toURI().toString());
+        MediaPlayer mediaPlayer = new MediaPlayer(media);
+
+        return mediaPlayer;
     }
 
     public static void main(String[] args) {

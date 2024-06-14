@@ -7,7 +7,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 
+import java.io.File;
 import java.io.IOException;
 
 /**
@@ -85,7 +89,6 @@ public class VueDuJeu extends BorderPane {
             }
         });
     }
-
     public IJeu getJeu() {
         return jeu;
     }

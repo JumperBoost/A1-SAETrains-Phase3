@@ -11,6 +11,8 @@ import javafx.event.EventHandler;
 import javafx.event.EventType;
 import javafx.scene.control.Alert;
 import javafx.scene.layout.Pane;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 import javafx.scene.text.Text;
 
 import java.util.*;
@@ -58,6 +60,9 @@ public class VueResultats extends Pane {
             podium++;
         }
         alert.setContentText(texte);
+        MediaPlayer applaudissement = TrainsIHM.creerMusique("src/main/resources/musique/applaudissement.mp3");
+        getChildren().add(new MediaView(applaudissement));
+        applaudissement.play();
         alert.showAndWait();
         Platform.exit();
     }
