@@ -2,6 +2,7 @@ package fr.umontpellier.iut.trainsJavaFX.vues;
 
 import fr.umontpellier.iut.trainsJavaFX.GestionJeu;
 import fr.umontpellier.iut.trainsJavaFX.IJeu;
+import javafx.beans.binding.DoubleBinding;
 import javafx.beans.property.IntegerProperty;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -34,6 +35,28 @@ public class VueReserve extends VBox {
             carte.setNbCartes(entry.getValue());
             cartesReserve.getChildren().add(carte);
         }
+    }
+
+    public void creerBinding(){
+        minHeightProperty().bind(new DoubleBinding() {
+            {
+                super.bind(getParent().getScene().heightProperty());
+            }
+            @Override
+            protected double computeValue() {
+                return getParent().getScene().heightProperty().getValue() / 2;
+            }
+        });
+
+        minWidthProperty().bind(new DoubleBinding() {
+            {
+                super.bind(getParent().getScene().widthProperty());
+            }
+            @Override
+            protected double computeValue() {
+                return getParent().getScene().widthProperty().getValue() / 3;
+            }
+        });
     }
 
     EventHandler<MouseEvent> actionChoisirCarte = (mouseEvent -> {
