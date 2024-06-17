@@ -3,7 +3,6 @@
 <?import fr.umontpellier.iut.trainsJavaFX.vues.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
 <fx:root prefHeight="850.0" prefWidth="1200.0" stylesheets="@../css/style.css" type="BorderPane" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1">
@@ -31,120 +30,7 @@
             <VuePlateau fx:id="plateau" />
             <VBox fx:id="conteneurChoix" alignment="CENTER">
                 <Label text="Faites un choix." />
-                <FlowPane fx:id="boxChoix" alignment="CENTER" hgap="10.0" maxWidth="900.0" vgap="10.0">
-                    <StackPane>
-                        <ImageView>
-                            <Image url="@../images/cartes/centre_de_controle.jpg" />
-                            <fitWidth>75</fitWidth>
-                            <fitHeight>105</fitHeight>
-                        </ImageView>
-                    </StackPane>
-                    <StackPane>
-                        <ImageView>
-                            <Image url="@../images/cartes/centre_de_controle.jpg" />
-                            <fitWidth>75</fitWidth>
-                            <fitHeight>105</fitHeight>
-                        </ImageView>
-                    </StackPane>
-                    <StackPane>
-                        <ImageView>
-                            <Image url="@../images/cartes/centre_de_controle.jpg" />
-                            <fitWidth>75</fitWidth>
-                            <fitHeight>105</fitHeight>
-                        </ImageView>
-                    </StackPane>
-                    <StackPane>
-                        <ImageView>
-                            <Image url="@../images/cartes/centre_de_controle.jpg" />
-                            <fitWidth>75</fitWidth>
-                            <fitHeight>105</fitHeight>
-                        </ImageView>
-                    </StackPane>
-                    <StackPane>
-                        <ImageView>
-                            <Image url="@../images/cartes/centre_de_controle.jpg" />
-                            <fitWidth>75</fitWidth>
-                            <fitHeight>105</fitHeight>
-                        </ImageView>
-                    </StackPane>
-                    <StackPane>
-                        <ImageView>
-                            <Image url="@../images/cartes/centre_de_controle.jpg" />
-                            <fitWidth>75</fitWidth>
-                            <fitHeight>105</fitHeight>
-                        </ImageView>
-                    </StackPane>
-                    <StackPane>
-                        <ImageView>
-                            <Image url="@../images/cartes/centre_de_controle.jpg" />
-                            <fitWidth>75</fitWidth>
-                            <fitHeight>105</fitHeight>
-                        </ImageView>
-                    </StackPane>
-                    <StackPane>
-                        <ImageView>
-                            <Image url="@../images/cartes/centre_de_controle.jpg" />
-                            <fitWidth>75</fitWidth>
-                            <fitHeight>105</fitHeight>
-                        </ImageView>
-                    </StackPane>
-                    <StackPane>
-                        <ImageView>
-                            <Image url="@../images/cartes/centre_de_controle.jpg" />
-                            <fitWidth>75</fitWidth>
-                            <fitHeight>105</fitHeight>
-                        </ImageView>
-                    </StackPane>
-                    <StackPane>
-                        <ImageView>
-                            <Image url="@../images/cartes/centre_de_controle.jpg" />
-                            <fitWidth>75</fitWidth>
-                            <fitHeight>105</fitHeight>
-                        </ImageView>
-                    </StackPane>
-                    <StackPane>
-                        <ImageView>
-                            <Image url="@../images/cartes/centre_de_controle.jpg" />
-                            <fitWidth>75</fitWidth>
-                            <fitHeight>105</fitHeight>
-                        </ImageView>
-                    </StackPane>
-                    <StackPane>
-                        <ImageView>
-                            <Image url="@../images/cartes/centre_de_controle.jpg" />
-                            <fitWidth>75</fitWidth>
-                            <fitHeight>105</fitHeight>
-                        </ImageView>
-                    </StackPane>
-                    <StackPane>
-                        <ImageView>
-                            <Image url="@../images/cartes/centre_de_controle.jpg" />
-                            <fitWidth>75</fitWidth>
-                            <fitHeight>105</fitHeight>
-                        </ImageView>
-                    </StackPane>
-                    <StackPane>
-                        <ImageView>
-                            <Image url="@../images/cartes/centre_de_controle.jpg" />
-                            <fitWidth>75</fitWidth>
-                            <fitHeight>105</fitHeight>
-                        </ImageView>
-                    </StackPane>
-                    <StackPane>
-                        <ImageView>
-                            <Image url="@../images/cartes/centre_de_controle.jpg" />
-                            <fitWidth>75</fitWidth>
-                            <fitHeight>105</fitHeight>
-                        </ImageView>
-                    </StackPane>
-                    <StackPane>
-                        <ImageView>
-                            <Image url="@../images/cartes/centre_de_controle.jpg" />
-                            <fitWidth>75</fitWidth>
-                            <fitHeight>105</fitHeight>
-                        </ImageView>
-                    </StackPane>
-                </FlowPane>
+                <FlowPane fx:id="boxChoix" alignment="CENTER" hgap="10.0" maxWidth="900.0" vgap="10.0" />
             </VBox>
             <Pane fx:id="zoomCarte" nodeOrientation="RIGHT_TO_LEFT">
                 <StackPane.margin>

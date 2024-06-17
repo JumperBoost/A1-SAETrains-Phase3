@@ -6,7 +6,7 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<fx:root stylesheets="@../css/style.css" type="VBox" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root stylesheets="@../css/style.css" type="VBox" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1">
     <HBox>
         <VBox alignment="BOTTOM_CENTER" styleClass="cardsBox">
             <HBox fx:id="cartesEnMain" prefHeight="105" prefWidth="500.0">
@@ -119,17 +119,6 @@
                     </ImageView>
                     <Label fx:id="scoreTotal" layoutX="32.0" layoutY="4.0" text="15" />
                 </Group>
-            <columnConstraints>
-               <ColumnConstraints />
-               <ColumnConstraints />
-               <ColumnConstraints />
-               <ColumnConstraints />
-            </columnConstraints>
-            <rowConstraints>
-               <RowConstraints />
-               <RowConstraints />
-               <RowConstraints />
-            </rowConstraints>
             </GridPane>
             <VBox styleClass="cardsBox">
                 <HBox fx:id="cartesEnJeu" />

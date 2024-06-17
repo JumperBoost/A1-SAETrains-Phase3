@@ -17,7 +17,6 @@ import javafx.scene.control.Label;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-//import java.lang.classfile.Label;
 
 /**
  * Cette classe présente les éléments des joueurs autres que le joueur courant,
@@ -64,11 +63,11 @@ public class VueAutresJoueurs extends VBox {
                 rail = new Label(String.valueOf(j.nbJetonsRailsProperty().getValue()));
 
                 scoreI = new ImageView(new Image("images/icons/score.png"));
-                scoreI.fitHeightProperty().set(30);
-                scoreI.fitWidthProperty().set(30);
+                scoreI.fitHeightProperty().set(24);
+                scoreI.fitWidthProperty().set(24);
                 railI = new ImageView(new Image("images/icons/" + CouleursJoueurs.nomCouleursCubeJoueur.get(j.getCouleur())));
-                railI.fitHeightProperty().set(30);
-                railI.fitWidthProperty().set(30);
+                railI.fitHeightProperty().set(24);
+                railI.fitWidthProperty().set(24);
 
                 donnee = new HBox(scoreI, score, railI, rail);
                 donnee.setSpacing(10);
