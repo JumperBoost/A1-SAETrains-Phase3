@@ -23,16 +23,18 @@ public class VueCarte extends StackPane {
     private final ICarte carte;
     private final ImageView imageView;
 
-    private final int ratioRedimensionnage = 5;
-
-    public VueCarte(ICarte carte) {
+    public VueCarte(ICarte carte, double ratioRedimensionnage) {
         this.carte = carte;
         String nomCarte = Normalizer.normalize(carte.getNom().replaceAll(" ", "_").toLowerCase(), Normalizer.Form.NFKD).replaceAll("\\p{M}", "");
         imageView = new ImageView(String.valueOf(getClass().getClassLoader()
                 .getResource("images/cartes/" + nomCarte + ".jpg")));
-        imageView.setFitWidth(imageView.getImage().getWidth() / ratioRedimensionnage);
-        imageView.setFitHeight(imageView.getImage().getHeight() / ratioRedimensionnage);
+        imageView.setFitWidth(imageView.getImage().getWidth() * ratioRedimensionnage);
+        imageView.setFitHeight(imageView.getImage().getHeight() * ratioRedimensionnage);
         getChildren().add(imageView);
+    }
+
+    public VueCarte(ICarte carte) {
+        this(carte, 0.2);
     }
 
     public void setCarteChoisieListener(EventHandler<MouseEvent> quandCarteEstChoisie) {

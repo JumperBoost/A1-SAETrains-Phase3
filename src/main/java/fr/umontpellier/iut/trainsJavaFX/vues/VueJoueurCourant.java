@@ -20,6 +20,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
+import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,7 +33,13 @@ public class VueJoueurCourant extends VBox {
     @FXML
     private HBox cartesEnMain;
     @FXML
-    private Button passer;
+    private Button passerBtn;
+    @FXML
+    private Button coinsBtn;
+    @FXML
+    private Button decksBtn;
+    @FXML
+    private Button defausseBtn;
     @FXML
     private Label pioche;
     @FXML
@@ -128,7 +135,7 @@ public class VueJoueurCourant extends VBox {
         box.getChildren().addAll(panes);
     }
 
-    private void ajouterListeners(ListeDeCartes listeDeCartes, HBox box) {
+    private void ajouterPaquetCarteListener(ListeDeCartes listeDeCartes, HBox box) {
         listeDeCartes.addListener((ListChangeListener<Carte>) change -> {
             while (change.next()) {
                 if (change.wasRemoved()) {
@@ -143,10 +150,43 @@ public class VueJoueurCourant extends VBox {
         });
     }
 
+    private void ajouterCartesAChoisirListener(ListeDeCartes listeDeCartes) {
+        List<String> nomCartesExclus = new ArrayList<>(List.of("Feu de signalisation", "Bureau du chef de Gare"));
+        listeDeCartes.addListener((ListChangeListener<Carte>) change -> {
+            while (change.next()) {
+                ListeDeCartes cartesEnJeu = vueDuJeu.getJeu().joueurCourantProperty().getValue().cartesEnJeuProperty();
+                Carte derniereCarte = cartesEnJeu.get(cartesEnJeu.size()-1);
+                if(nomCartesExclus.contains(derniereCarte.getNom()))
+                    return;
+
+                boolean isEmpty = change.getList().isEmpty();
+                vueDuJeu.getBoxChoix().getChildren().clear();
+                for(Carte carte : change.getList()) {
+                    VueCarte vueCarte = new VueCarte(carte, 0.3);
+                    vueCarte.setCarteChoisieListener(actionChoisirCarteAChoisir);
+                    vueDuJeu.getBoxChoix().getChildren().add(vueCarte);
+                }
+                vueDuJeu.getConteneurChoix().setVisible(!isEmpty);
+            }
+        });
+    }
+
     public void creerBindings() {
         vueDuJeu = (VueDuJeu) getParent().getParent();
 
-        passer.setOnMouseClicked(actionPasserParDefaut);
+        // Bindings des actions
+        passerBtn.setOnMouseClicked(actionChoisirBouton);
+        coinsBtn.setOnMouseClicked(actionChoisirBouton);
+        decksBtn.setOnMouseClicked(actionChoisirBouton);
+        defausseBtn.setOnMouseClicked(actionChoisirBouton);
+        vueDuJeu.getJeu().instructionProperty().addListener((obs, oldValue, newValue) -> {
+            newValue = Normalizer.normalize(newValue.toLowerCase(), Normalizer.Form.NFKD).replaceAll("\\p{M}", "");
+            passerBtn.setDisable(!newValue.contains("passez") && !newValue.contains("pas assez d'argent"));
+            coinsBtn.setDisable(!newValue.contains("argent") || newValue.contains("assez"));
+            decksBtn.setDisable(!newValue.contains("deck") || newValue.contains("nommez"));
+            defausseBtn.setDisable(!newValue.contains("defausse"));
+        });
+
         // Affichage des cartes
         vueDuJeu.getJeu().joueurCourantProperty().addListener((observableValue, oldValue, newValue) -> {
             IJoueur joueur = newValue;
@@ -172,20 +212,32 @@ public class VueJoueurCourant extends VBox {
         });
 
         for(IJoueur joueur : vueDuJeu.getJeu().getJoueurs()) {
-            ajouterListeners(joueur.mainProperty(), cartesEnMain);
-            ajouterListeners(joueur.cartesEnJeuProperty(), cartesEnJeu);
-            ajouterListeners(joueur.cartesRecuesProperty(), cartesRecues);
+            ajouterPaquetCarteListener(joueur.mainProperty(), cartesEnMain);
+            ajouterPaquetCarteListener(joueur.cartesEnJeuProperty(), cartesEnJeu);
+            ajouterPaquetCarteListener(joueur.cartesRecuesProperty(), cartesRecues);
+            ajouterCartesAChoisirListener(joueur.cartesAChoisir());
         }
     }
 
-    EventHandler<? super MouseEvent> actionPasserParDefaut = (mouseEvent ->  {
-        System.out.println("Vous avez choisi Passer");
-        vueDuJeu.getJeu().passerAEteChoisi();
+    EventHandler<MouseEvent> actionChoisirBouton = (mouseEvent -> {
+        switch (((Node) mouseEvent.getSource()).getId()) {
+            case "passerBtn" -> vueDuJeu.getJeu().passerAEteChoisi();
+            case "coinsBtn" -> vueDuJeu.getJeu().joueurCourantProperty().getValue().recevoirArgentAEteChoisi();
+            case "decksBtn" -> vueDuJeu.getJeu().joueurCourantProperty().getValue().laPiocheAEteChoisie();
+            case "defausseBtn" -> vueDuJeu.getJeu().joueurCourantProperty().getValue().laDefausseAEteChoisie();
+        }
+    });
+
+    EventHandler<MouseEvent> actionChoisirCarteAChoisir = (mouseEvent -> {
+        VueCarte vueCarte = (VueCarte) mouseEvent.getSource();
+        vueDuJeu.getJeu().uneCarteAChoisirChoisie(vueCarte.getCarte().getNom());
     });
 
     EventHandler<MouseEvent> actionChoisirCarte = (mouseEvent -> {
         VueCarte vueCarte = (VueCarte) mouseEvent.getSource();
         if(vueCarte.getParent().getId().startsWith(cartesEnMain.getId() + "_"))
             vueDuJeu.getJeu().joueurCourantProperty().getValue().uneCarteDeLaMainAEteChoisie(vueCarte.getCarte().getNom());
+        else if(vueCarte.getParent().getId().startsWith(cartesEnJeu.getId() + "_"))
+            vueDuJeu.getJeu().joueurCourantProperty().getValue().uneCarteEnJeuAEteChoisie(vueCarte.getCarte().getNom());
     });
 }

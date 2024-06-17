@@ -32,11 +32,7 @@
         <HBox fx:id="bottomBox" alignment="CENTER" spacing="15.0">
             <GridPane alignment="CENTER" hgap="20.0" vgap="5.0">
                 <VBox alignment="CENTER" GridPane.columnSpan="4">
-                    <HBox fx:id="actionBox" alignment="CENTER" spacing="10.0">
-                        <Button>Oui</Button>
-                        <Button>Non</Button>
-                    </HBox>
-                    <Button fx:id="passer" style="-fx-background-color: transparent">
+                    <Button fx:id="passerBtn">
                         <graphic>
                             <ImageView>
                                 <Image url="@../images/boutons/passer.png" />
@@ -45,6 +41,35 @@
                             </ImageView>
                         </graphic>
                     </Button>
+                    <HBox alignment="CENTER" spacing="10.0">
+                        <Button fx:id="coinsBtn">
+                            <graphic>
+                                <ImageView>
+                                    <Image url="@../images/boutons/coins.png" />
+                                    <fitWidth>48.0</fitWidth>
+                                    <fitHeight>48.0</fitHeight>
+                                </ImageView>
+                            </graphic>
+                        </Button>
+                        <Button fx:id="decksBtn">
+                            <graphic>
+                                <ImageView>
+                                    <Image url="@../images/boutons/deck.png" />
+                                    <fitWidth>48.0</fitWidth>
+                                    <fitHeight>48.0</fitHeight>
+                                </ImageView>
+                            </graphic>
+                        </Button>
+                        <Button fx:id="defausseBtn">
+                            <graphic>
+                                <ImageView>
+                                    <Image url="@../images/boutons/defausse.png" />
+                                    <fitWidth>48.0</fitWidth>
+                                    <fitHeight>48.0</fitHeight>
+                                </ImageView>
+                            </graphic>
+                        </Button>
+                    </HBox>
                 </VBox>
                 <Group GridPane.rowIndex="1">
                     <ImageView>
