@@ -5,9 +5,9 @@
 
 <fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" type="Pane" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <VBox alignment="CENTER" layoutX="193.0" layoutY="41.0" prefHeight="319.0" prefWidth="214.0" spacing="5.0">
+      <VBox alignment="CENTER" layoutX="193.0" layoutY="41.0" spacing="5.0">
          <children>
-            <VBox fx:id="conteneurChoix" alignment="TOP_CENTER" prefHeight="290.0" prefWidth="197.0" spacing="5.0">
+            <VBox fx:id="conteneurChoix" alignment="TOP_CENTER" spacing="5.0">
                 <children>
                   <Label alignment="CENTER" contentDisplay="CENTER" text="Combien de joueurs doit-il y avoir ?" textAlignment="JUSTIFY" />
                   <TextField fx:id="nbJoueursChoix" />
