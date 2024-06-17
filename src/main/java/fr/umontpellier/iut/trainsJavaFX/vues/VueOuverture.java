@@ -104,11 +104,13 @@ public class VueOuverture extends Pane {
         commencer.setOnMouseClicked(debuterPartie);
         nbJoueursChoisi.setOnMouseClicked(event ->{
             try{
-                if (Integer.parseInt(nbJoueursChoix.getText())<5 && Integer.parseInt(nbJoueursChoix.getText())>0) {
+                if (Integer.parseInt(nbJoueursChoix.getText())<5 && Integer.parseInt(nbJoueursChoix.getText())>1) {
                     effacerAncienBouton();
                     int nb = Integer.parseInt(nbJoueursChoix.getText());
                     erreur.setText("");
                     nbJoueursChoix.clear();
+                    if (conteneurChoix.getChildren().get(conteneurChoix.getChildren().size()-1) instanceof VBox)
+                        conteneurChoix.getChildren().remove(conteneurChoix.getChildren().size()-1);
                     for (int i = 1; i <= nb; i++) {
                         ecritureNomJoueurs.getChildren().addAll(new Label("Nom du joueur n°" + i), new TextField());
                     }
