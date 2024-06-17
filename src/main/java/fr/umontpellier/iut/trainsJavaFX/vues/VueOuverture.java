@@ -69,7 +69,7 @@ public class VueOuverture extends Pane {
         for (Node node : ecritureNomJoueurs.getChildren()){
             if (node instanceof TextField){
                 text = (TextField) node;
-                if (text.getText() == "") {
+                if (text.getText().isEmpty()) {
                     nomRemplis = false;
                     erreur.setText("Donnez un nom à Chaque Joueurs");
                 }
