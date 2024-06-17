@@ -1,151 +1,119 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<fx:root alignment="CENTER" prefHeight="620.0" prefWidth="340.0" stylesheets="@../css/style.css" type="VBox" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1">
-    <FlowPane fx:id="cartesReserve" alignment="CENTER" hgap="5.0" prefWrapLength="0.0" vgap="5.0">
-        <StackPane>
-            <ImageView>
-                <Image url="@../images/cartes/centre_de_controle.jpg" />
-                <fitWidth>75</fitWidth>
-                <fitHeight>105</fitHeight>
-            </ImageView>
-        </StackPane>
-        <StackPane>
-            <ImageView>
-                <Image url="@../images/cartes/centre_de_controle.jpg" />
-                <fitWidth>75</fitWidth>
-                <fitHeight>105</fitHeight>
-            </ImageView>
-        </StackPane>
-        <StackPane>
-            <ImageView>
-                <Image url="@../images/cartes/centre_de_controle.jpg" />
-                <fitWidth>75</fitWidth>
-                <fitHeight>105</fitHeight>
-            </ImageView>
-        </StackPane>
-        <StackPane>
-            <ImageView>
-                <Image url="@../images/cartes/centre_de_controle.jpg" />
-                <fitWidth>75</fitWidth>
-                <fitHeight>105</fitHeight>
-            </ImageView>
-        </StackPane>
-        <StackPane>
-            <ImageView>
-                <Image url="@../images/cartes/centre_de_controle.jpg" />
-                <fitWidth>75</fitWidth>
-                <fitHeight>105</fitHeight>
-            </ImageView>
-        </StackPane>
-        <StackPane>
-            <ImageView>
-                <Image url="@../images/cartes/centre_de_controle.jpg" />
-                <fitWidth>75</fitWidth>
-                <fitHeight>105</fitHeight>
-            </ImageView>
-        </StackPane>
-        <StackPane>
-            <ImageView>
-                <Image url="@../images/cartes/centre_de_controle.jpg" />
-                <fitWidth>75</fitWidth>
-                <fitHeight>105</fitHeight>
-            </ImageView>
-        </StackPane>
-        <StackPane>
-            <ImageView>
-                <Image url="@../images/cartes/centre_de_controle.jpg" />
-                <fitWidth>75</fitWidth>
-                <fitHeight>105</fitHeight>
-            </ImageView>
-        </StackPane>
-        <StackPane>
-            <ImageView>
-                <Image url="@../images/cartes/centre_de_controle.jpg" />
-                <fitWidth>75</fitWidth>
-                <fitHeight>105</fitHeight>
-            </ImageView>
-        </StackPane>
-        <StackPane>
-            <ImageView>
-                <Image url="@../images/cartes/centre_de_controle.jpg" />
-                <fitWidth>75</fitWidth>
-                <fitHeight>105</fitHeight>
-            </ImageView>
-        </StackPane>
-        <StackPane>
-            <ImageView>
-                <Image url="@../images/cartes/centre_de_controle.jpg" />
-                <fitWidth>75</fitWidth>
-                <fitHeight>105</fitHeight>
-            </ImageView>
-        </StackPane>
-        <StackPane>
-            <ImageView>
-                <Image url="@../images/cartes/centre_de_controle.jpg" />
-                <fitWidth>75</fitWidth>
-                <fitHeight>105</fitHeight>
-            </ImageView>
-        </StackPane>
-        <StackPane>
-            <ImageView>
-                <Image url="@../images/cartes/centre_de_controle.jpg" />
-                <fitWidth>75</fitWidth>
-                <fitHeight>105</fitHeight>
-            </ImageView>
-        </StackPane>
-        <StackPane>
-            <ImageView>
-                <Image url="@../images/cartes/centre_de_controle.jpg" />
-                <fitWidth>75</fitWidth>
-                <fitHeight>105</fitHeight>
-            </ImageView>
-        </StackPane>
-        <StackPane>
-            <ImageView>
-                <Image url="@../images/cartes/centre_de_controle.jpg" />
-                <fitWidth>75</fitWidth>
-                <fitHeight>105</fitHeight>
-            </ImageView>
-        </StackPane>
-        <StackPane>
-            <ImageView>
-                <Image url="@../images/cartes/centre_de_controle.jpg" />
-                <fitWidth>75</fitWidth>
-                <fitHeight>105</fitHeight>
-            </ImageView>
-        </StackPane>
-    </FlowPane>
-    <VBox styleClass="cardsBox">
-        <HBox fx:id="cartesEcartees" alignment="CENTER">
-            <StackPane>
-                <ImageView>
-                    <Image url="@../images/cartes/horaires_estivaux.jpg" />
-                    <fitWidth>75</fitWidth>
-                    <fitHeight>105</fitHeight>
-                </ImageView>
-            </StackPane>
-            <VBox.margin>
-                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-            </VBox.margin>
-        </HBox>
-        <HBox alignment="CENTER">
-            <ImageView>
-                <Image url="@../images/boutons/defausse.png" />
-                <fitWidth>24</fitWidth>
-                <fitHeight>24</fitHeight>
-                <HBox.margin>
-                    <Insets right="5.0" />
-                </HBox.margin>
-            </ImageView>
-            <Label text="Écartées" />
-            <VBox.margin>
-                <Insets left="5.0" />
-            </VBox.margin>
-        </HBox>
-    </VBox>
+<fx:root fx:id="cartesReserve" alignment="CENTER" hgap="5.0" prefHeight="460.0" prefWidth="340.0" stylesheets="@../css/style.css" type="FlowPane" vgap="5.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1">
+    <StackPane>
+        <ImageView>
+            <Image url="@../images/cartes/centre_de_controle.jpg" />
+            <fitWidth>75</fitWidth>
+            <fitHeight>105</fitHeight>
+        </ImageView>
+    </StackPane>
+    <StackPane>
+        <ImageView>
+            <Image url="@../images/cartes/centre_de_controle.jpg" />
+            <fitWidth>75</fitWidth>
+            <fitHeight>105</fitHeight>
+        </ImageView>
+    </StackPane>
+    <StackPane>
+        <ImageView>
+            <Image url="@../images/cartes/centre_de_controle.jpg" />
+            <fitWidth>75</fitWidth>
+            <fitHeight>105</fitHeight>
+        </ImageView>
+    </StackPane>
+    <StackPane>
+        <ImageView>
+            <Image url="@../images/cartes/centre_de_controle.jpg" />
+            <fitWidth>75</fitWidth>
+            <fitHeight>105</fitHeight>
+        </ImageView>
+    </StackPane>
+    <StackPane>
+        <ImageView>
+            <Image url="@../images/cartes/centre_de_controle.jpg" />
+            <fitWidth>75</fitWidth>
+            <fitHeight>105</fitHeight>
+        </ImageView>
+    </StackPane>
+    <StackPane>
+        <ImageView>
+            <Image url="@../images/cartes/centre_de_controle.jpg" />
+            <fitWidth>75</fitWidth>
+            <fitHeight>105</fitHeight>
+        </ImageView>
+    </StackPane>
+    <StackPane>
+        <ImageView>
+            <Image url="@../images/cartes/centre_de_controle.jpg" />
+            <fitWidth>75</fitWidth>
+            <fitHeight>105</fitHeight>
+        </ImageView>
+    </StackPane>
+    <StackPane>
+        <ImageView>
+            <Image url="@../images/cartes/centre_de_controle.jpg" />
+            <fitWidth>75</fitWidth>
+            <fitHeight>105</fitHeight>
+        </ImageView>
+    </StackPane>
+    <StackPane>
+        <ImageView>
+            <Image url="@../images/cartes/centre_de_controle.jpg" />
+            <fitWidth>75</fitWidth>
+            <fitHeight>105</fitHeight>
+        </ImageView>
+    </StackPane>
+    <StackPane>
+        <ImageView>
+            <Image url="@../images/cartes/centre_de_controle.jpg" />
+            <fitWidth>75</fitWidth>
+            <fitHeight>105</fitHeight>
+        </ImageView>
+    </StackPane>
+    <StackPane>
+        <ImageView>
+            <Image url="@../images/cartes/centre_de_controle.jpg" />
+            <fitWidth>75</fitWidth>
+            <fitHeight>105</fitHeight>
+        </ImageView>
+    </StackPane>
+    <StackPane>
+        <ImageView>
+            <Image url="@../images/cartes/centre_de_controle.jpg" />
+            <fitWidth>75</fitWidth>
+            <fitHeight>105</fitHeight>
+        </ImageView>
+    </StackPane>
+    <StackPane>
+        <ImageView>
+            <Image url="@../images/cartes/centre_de_controle.jpg" />
+            <fitWidth>75</fitWidth>
+            <fitHeight>105</fitHeight>
+        </ImageView>
+    </StackPane>
+    <StackPane>
+        <ImageView>
+            <Image url="@../images/cartes/centre_de_controle.jpg" />
+            <fitWidth>75</fitWidth>
+            <fitHeight>105</fitHeight>
+        </ImageView>
+    </StackPane>
+    <StackPane>
+        <ImageView>
+            <Image url="@../images/cartes/centre_de_controle.jpg" />
+            <fitWidth>75</fitWidth>
+            <fitHeight>105</fitHeight>
+        </ImageView>
+    </StackPane>
+    <StackPane>
+        <ImageView>
+            <Image url="@../images/cartes/centre_de_controle.jpg" />
+            <fitWidth>75</fitWidth>
+            <fitHeight>105</fitHeight>
+        </ImageView>
+    </StackPane>
 </fx:root>
