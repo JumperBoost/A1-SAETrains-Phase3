@@ -57,7 +57,8 @@ public class VueDuJeu extends BorderPane {
         plateau.prefHeightProperty().bind(getScene().heightProperty());
         plateau.creerBindings();
         joueurCourant.creerBindings();
-        autresJoueurs.creerBinding();
+        autresJoueurs.creerBindings();
+        reserve.creerBindings();
         instruction.textProperty().bind(jeu.instructionProperty());
         minHeightProperty().bind(new DoubleBinding() {
             {

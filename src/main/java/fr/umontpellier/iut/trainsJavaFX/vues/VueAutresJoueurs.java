@@ -2,15 +2,9 @@ package fr.umontpellier.iut.trainsJavaFX.vues;
 
 import fr.umontpellier.iut.trainsJavaFX.IJeu;
 import fr.umontpellier.iut.trainsJavaFX.IJoueur;
-import fr.umontpellier.iut.trainsJavaFX.mecanique.CouleurJoueur;
-import fr.umontpellier.iut.trainsJavaFX.mecanique.Joueur;
-import javafx.beans.binding.Bindings;
 import javafx.beans.binding.DoubleBinding;
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.ListChangeListener;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -86,7 +80,7 @@ public class VueAutresJoueurs extends VBox {
         }
     }
 
-    public void creerBinding(){
+    public void creerBindings(){
         vueDuJeu = (VueDuJeu) getParent().getParent();
         setAlignment(Pos.TOP_CENTER);
         setSpacing(20);

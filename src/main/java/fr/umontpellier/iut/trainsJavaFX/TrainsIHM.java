@@ -3,12 +3,11 @@ package fr.umontpellier.iut.trainsJavaFX;
 import fr.umontpellier.iut.trainsJavaFX.mecanique.Jeu;
 import fr.umontpellier.iut.trainsJavaFX.mecanique.cartes.FabriqueListeDeCartes;
 import fr.umontpellier.iut.trainsJavaFX.mecanique.plateau.Plateau;
-import fr.umontpellier.iut.trainsJavaFX.vues.DonneesGraphiques;
-import fr.umontpellier.iut.trainsJavaFX.vues.VueChoixJoueurs;
-import fr.umontpellier.iut.trainsJavaFX.vues.VueDuJeu;
-import fr.umontpellier.iut.trainsJavaFX.vues.VueResultats;
+import fr.umontpellier.iut.trainsJavaFX.vues.*;
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ListChangeListener;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -38,11 +37,12 @@ public class TrainsIHM extends Application {
     private Jeu jeu;
 
     private final boolean avecVueChoixJoueurs = false;
+    private BooleanProperty commencer = new SimpleBooleanProperty(false);
 
     @Override
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
-        debuterJeu();
+        ouvrir();
     }
 
     private void debuterJeu() {
@@ -55,20 +55,51 @@ public class TrainsIHM extends Application {
         }
     }
 
-    public void demarrerPartie() {
-       String[] nomsJoueurs;
-       Plateau plateau = Plateau.OSAKA;
-       if (avecVueChoixJoueurs) {
+    public void ouvrir(){
+        String[] nomsJoueurs;
+        Plateau plateau = Plateau.OSAKA;
+        VueOuverture ouverture = new VueOuverture();
+        ouverture.creerBindings();
+        Scene scene = new Scene(ouverture, Screen.getPrimary().getBounds().getWidth() * DonneesGraphiques.pourcentageEcran, Screen.getPrimary().getBounds().getHeight() * DonneesGraphiques.pourcentageEcran);
+        primaryStage.setMinWidth(Screen.getPrimary().getBounds().getWidth() / 2.5);
+        primaryStage.setMinHeight(Screen.getPrimary().getBounds().getHeight() / 2.5);
+        primaryStage.setMaxWidth(Screen.getPrimary().getBounds().getWidth());
+        primaryStage.setMaxHeight(Screen.getPrimary().getBounds().getHeight());
+
+        primaryStage.setScene(scene);
+        primaryStage.setTitle("Trains");
+        primaryStage.centerOnScreen();
+        primaryStage.setOnCloseRequest(event -> {
+            this.arreterJeu();
+            event.consume();
+        });
+        primaryStage.show();
+        if (avecVueChoixJoueurs) {
             nomsJoueurs = vueChoixJoueurs.getNomsJoueurs().toArray(new String[0]);
             plateau = vueChoixJoueurs.getPlateau();
-       } else {
-            nomsJoueurs = new String[]{"John", "Paul", "George", "Ringo"};
-       }
+        } else {
+            commencer.bind(ouverture.partiePrete());
+            commencer.addListener(new ChangeListener<Boolean>() {
+                @Override
+                public void changed(ObservableValue<? extends Boolean> observableValue, Boolean aBoolean, Boolean t1) {
+                    if (t1) {
+                        String[] nomsJoueurs = ouverture.getNomJoueurs();
+                        List<String> cartesPreparation = new ArrayList<>(FabriqueListeDeCartes.getNomsCartesPreparation());
+                        Collections.shuffle(cartesPreparation);
+                        String[] nomsCartes = cartesPreparation.subList(0, 8).toArray(new String[0]);
+                        jeu = new Jeu(nomsJoueurs, nomsCartes, plateau);
+                        demarrerPartie();
+                    }
+                }
+            });
+
+        }
         // Tirer aléatoirement 8 cartes préparation
-        List<String> cartesPreparation = new ArrayList<>(FabriqueListeDeCartes.getNomsCartesPreparation());
-        Collections.shuffle(cartesPreparation);
-        String[] nomsCartes = cartesPreparation.subList(0, 8).toArray(new String[0]);
-        jeu = new Jeu(nomsJoueurs, nomsCartes, plateau);
+
+    }
+
+    public void demarrerPartie() {
+
         GestionJeu.setJeu(jeu);
         VueDuJeu vueDuJeu = new VueDuJeu(jeu);
 
@@ -93,7 +124,7 @@ public class TrainsIHM extends Application {
             event.consume();
         });
         musique.setAutoPlay(true);
-        primaryStage.show();
+
         musique.setCycleCount(MediaPlayer.INDEFINITE);
         musique.play();
 
