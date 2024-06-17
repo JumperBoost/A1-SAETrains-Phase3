@@ -12,7 +12,7 @@
                   <Label alignment="CENTER" contentDisplay="CENTER" text="Combien de joueurs doit-il y avoir ?" textAlignment="JUSTIFY" />
                   <TextField fx:id="nbJoueursChoix" />
                   <Button fx:id="nbJoueursChoisi" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Button" />
-                  <Label fx:id="erreur" />
+                  <Label fx:id="erreur" textFill="#b90c0c" />
                 </children>
             </VBox>
             <Button fx:id="commencer" disable="true" mnemonicParsing="false" text="commencer" />
