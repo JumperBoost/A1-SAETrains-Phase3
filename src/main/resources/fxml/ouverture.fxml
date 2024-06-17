@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" type="Pane" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox alignment="CENTER" layoutX="193.0" layoutY="41.0" spacing="5.0">
+         <children>
+            <VBox fx:id="conteneurChoix" alignment="TOP_CENTER" spacing="5.0">
+                <children>
+                  <Label alignment="CENTER" contentDisplay="CENTER" text="Combien de joueurs doit-il y avoir ?" textAlignment="JUSTIFY" />
+                  <TextField fx:id="nbJoueursChoix" />
+                  <Button fx:id="nbJoueursChoisi" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Button" />
+                  <Label fx:id="erreur" textFill="#b90c0c" />
+                </children>
+            </VBox>
+            <Button fx:id="commencer" disable="true" mnemonicParsing="false" text="commencer" />
+         </children>
+      </VBox>
+   </children>
+</fx:root>
