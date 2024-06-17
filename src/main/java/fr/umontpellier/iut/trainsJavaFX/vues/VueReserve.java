@@ -12,7 +12,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.MediaPlayer;
-import javafx.scene.media.MediaView;
 
 import java.io.IOException;
 import java.util.Map;
@@ -40,7 +39,7 @@ public class VueReserve extends VBox {
         }
     }
 
-    public void creerBinding(){
+    public void creerBindings(){
         minHeightProperty().bind(new DoubleBinding() {
             {
                 super.bind(getParent().getScene().heightProperty());
@@ -48,16 +47,6 @@ public class VueReserve extends VBox {
             @Override
             protected double computeValue() {
                 return getParent().getScene().heightProperty().getValue() / 2;
-            }
-        });
-
-        minWidthProperty().bind(new DoubleBinding() {
-            {
-                super.bind(getParent().getScene().widthProperty());
-            }
-            @Override
-            protected double computeValue() {
-                return getParent().getScene().widthProperty().getValue() / 3;
             }
         });
     }
