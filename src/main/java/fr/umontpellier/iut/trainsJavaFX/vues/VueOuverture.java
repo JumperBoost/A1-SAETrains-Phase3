@@ -11,7 +11,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -26,7 +25,7 @@ import java.util.List;
  * (le joueur courant, ses cartes en main, son score, ...)
  * ainsi que les listeners à exécuter lorsque ces éléments changent
  */
-public class VueOuverture extends Pane {
+public class VueOuverture extends VBox {
 
     @FXML
     private VBox conteneurChoix;
@@ -90,7 +89,6 @@ public class VueOuverture extends Pane {
         for (Node node : ecritureNomJoueurs.getChildren()){
             if (node instanceof TextField){
                 text = (TextField) node;
-                System.out.println(text.getText());
                 miniText = text.getText();
                 nomJoueurs.add(miniText);
             }
@@ -102,9 +100,10 @@ public class VueOuverture extends Pane {
     @FXML
     private void initialize(){
         commencer.setOnMouseClicked(debuterPartie);
+        ecritureNomJoueurs.setMaxWidth(150);
         nbJoueursChoisi.setOnMouseClicked(event ->{
             try{
-                if (Integer.parseInt(nbJoueursChoix.getText())<5 && Integer.parseInt(nbJoueursChoix.getText())>1) {
+                if (Integer.parseInt(nbJoueursChoix.getText())<=4 && Integer.parseInt(nbJoueursChoix.getText())>1) {
                     effacerAncienBouton();
                     int nb = Integer.parseInt(nbJoueursChoix.getText());
                     erreur.setText("");
@@ -117,10 +116,9 @@ public class VueOuverture extends Pane {
                     conteneurChoix.getChildren().add(ecritureNomJoueurs);
                     commencer.setDisable(false);
                 }
-                else erreur.setText("Veuillez donné un chiffre valide entre 1 et 4");
+                else erreur.setText("Veuillez donné un chiffre valide entre 2 et 4");
             } catch (Exception e){
-                System.out.println(e.getMessage());
-                erreur.setText("Veuillez donné un chiffre valide entre 1 et 4");
+                erreur.setText("Veuillez donné un chiffre valide entre 2 et 4");
             }
         });
     }

@@ -34,7 +34,6 @@ public class VueReserve extends FlowPane {
 
     EventHandler<MouseEvent> actionChoisirCarte = (mouseEvent -> {
         VueCarte vueCarte = (VueCarte) mouseEvent.getSource();
-        System.out.println(GestionJeu.getVueDuJeu().getChildren());
         TrainsIHM.lancerMusique("argent");
         GestionJeu.getJeu().uneCarteDeLaReserveEstAchetee(vueCarte.getCarte().getNom());
     });

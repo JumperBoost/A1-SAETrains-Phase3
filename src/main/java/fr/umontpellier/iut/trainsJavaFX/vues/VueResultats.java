@@ -6,6 +6,7 @@ import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.layout.Pane;
 
 import java.util.*;
@@ -23,7 +24,7 @@ public class VueResultats extends Pane {
     };
 
     public void afficherResultat(){
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        Alert alert = new Alert(Alert.AlertType.INFORMATION, "", new ButtonType[]{ new ButtonType("Oui"), new ButtonType("Non") });
         alert.setTitle("Fin de partie");
         Set<IJoueur> ordreGagnant = new TreeSet<>(new Comparator<IJoueur>() {
             @Override
@@ -52,18 +53,20 @@ public class VueResultats extends Pane {
             texte = texte + podium + "eme " + j.getNom() + " - score : " + j.getScoreTotal() + "\n";
             podium++;
         }
-        alert.setContentText(texte);
+        alert.setHeaderText(texte);
+        alert.setContentText("Voulez-vous relancer une partie ?");
         TrainsIHM.arreterMusique("train_aventure");
         TrainsIHM.lancerMusique("applaudissement");
-        alert.showAndWait();
-        Platform.exit();
+        Optional<ButtonType> result = alert.showAndWait();
+        if(result.get().getText().equals("Oui")) {
+            ihm.debuterJeu();
+        } else Platform.exit();
     }
 
     ChangeListener<Boolean> fini = new ChangeListener<Boolean>(){
         @Override
-        public void changed(ObservableValue<? extends Boolean> observableValue, Boolean booleanProperty, Boolean t1) {
-            if (t1){
-                System.out.println("FINI");
+        public void changed(ObservableValue<? extends Boolean> observableValue, Boolean oldValue, Boolean newValue) {
+            if (newValue){
                 afficherResultat();
             }
         }

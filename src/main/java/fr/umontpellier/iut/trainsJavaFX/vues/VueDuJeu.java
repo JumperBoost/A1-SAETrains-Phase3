@@ -61,8 +61,6 @@ public class VueDuJeu extends BorderPane {
     @FXML
     private void initialize() {
         TrainsIHM.chargerMusiques();
-        System.out.println("chargé!");
-        System.out.println(getChildren());
         TrainsIHM.lancerMusique("train_aventure");
     }
 

@@ -29,26 +29,22 @@ public class TrainsIHM extends Application {
     private Stage primaryStage;
     private Jeu jeu;
 
-    private final boolean avecVueChoixJoueurs = false;
+    private final boolean avecVueChoixJoueurs = true;
     private BooleanProperty commencer = new SimpleBooleanProperty(false);
 
     @Override
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
-        ouvrir();
+        debuterJeu();
     }
 
-    private void debuterJeu() {
-        if (avecVueChoixJoueurs) {
-            vueChoixJoueurs = new VueChoixJoueurs();
-            vueChoixJoueurs.setNomsDesJoueursDefinisListener(quandLesNomsJoueursSontDefinis);
-            vueChoixJoueurs.show();
-        } else {
-            demarrerPartie();
-        }
+    public void debuterJeu() {
+        if(avecVueChoixJoueurs)
+            ouvrir();
+        else demarrerPartie();
     }
 
-    public void ouvrir(){
+    private void ouvrir() {
         String[] nomsJoueurs;
         Plateau plateau = Plateau.OSAKA;
         VueOuverture ouverture = new VueOuverture();
@@ -67,26 +63,21 @@ public class TrainsIHM extends Application {
             event.consume();
         });
         primaryStage.show();
-        if (avecVueChoixJoueurs) {
-            nomsJoueurs = vueChoixJoueurs.getNomsJoueurs().toArray(new String[0]);
-            plateau = vueChoixJoueurs.getPlateau();
-        } else {
-            commencer.bind(ouverture.partiePrete());
-            commencer.addListener(new ChangeListener<Boolean>() {
-                @Override
-                public void changed(ObservableValue<? extends Boolean> observableValue, Boolean aBoolean, Boolean t1) {
-                    if (t1) {
-                        String[] nomsJoueurs = ouverture.getNomJoueurs();
-                        List<String> cartesPreparation = new ArrayList<>(FabriqueListeDeCartes.getNomsCartesPreparation());
-                        Collections.shuffle(cartesPreparation);
-                        String[] nomsCartes = cartesPreparation.subList(0, 8).toArray(new String[0]);
-                        jeu = new Jeu(nomsJoueurs, nomsCartes, plateau);
-                        demarrerPartie();
-                    }
+        commencer.bind(ouverture.partiePrete());
+        commencer.addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observableValue, Boolean aBoolean, Boolean t1) {
+                if (t1) {
+                    String[] nomsJoueurs = ouverture.getNomJoueurs();
+                    List<String> cartesPreparation = new ArrayList<>(FabriqueListeDeCartes.getNomsCartesPreparation());
+                    Collections.shuffle(cartesPreparation);
+                    String[] nomsCartes = cartesPreparation.subList(0, 8).toArray(new String[0]);
+                    jeu = new Jeu(nomsJoueurs, nomsCartes, plateau);
+                    demarrerPartie();
                 }
-            });
+            }
+        });
 
-        }
         // Tirer aléatoirement 8 cartes préparation
 
     }
@@ -131,7 +122,6 @@ public class TrainsIHM extends Application {
     }
 
     public void demarrerPartie() {
-
         GestionJeu.setJeu(jeu);
         VueDuJeu vueDuJeu = new VueDuJeu(jeu);
 
