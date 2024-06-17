@@ -7,7 +7,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
-
+import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.VBox;
 import java.io.IOException;
 
 /**
@@ -34,6 +35,10 @@ public class VueDuJeu extends BorderPane {
     private Label instruction;
     @FXML
     private Label nomJoueur;
+    @FXML
+    private VBox conteneurChoix;
+    @FXML
+    private FlowPane boxChoix;
 
     public VueDuJeu(IJeu jeu) {
         try {
@@ -86,6 +91,15 @@ public class VueDuJeu extends BorderPane {
             }
         });
     }
+
+    public VBox getConteneurChoix() {
+        return conteneurChoix;
+    }
+
+    public FlowPane getBoxChoix() {
+        return boxChoix;
+    }
+
     public IJeu getJeu() {
         return jeu;
     }

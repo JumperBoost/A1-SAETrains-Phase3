@@ -69,7 +69,7 @@ public class VuePlateau extends Pane {
     }
 
     private Map.Entry<NumberBinding, NumberBinding> getTailleBindings() {
-        VueDuJeu vueDuJeu = (VueDuJeu) getParent();
+        VueDuJeu vueDuJeu = (VueDuJeu) getParent().getParent();
         NumberBinding widthBinding = Bindings.subtract(vueDuJeu.widthProperty(), ((Region) vueDuJeu.getLeft()).widthProperty()).subtract(((Region) vueDuJeu.getRight()).widthProperty());
         NumberBinding heightBinding = Bindings.subtract(vueDuJeu.heightProperty(), ((Region) vueDuJeu.getTop()).heightProperty()).subtract(((Region) vueDuJeu.getBottom()).heightProperty());
         return new AbstractMap.SimpleEntry<>(widthBinding, heightBinding);
