@@ -2,6 +2,7 @@ package fr.umontpellier.iut.trainsJavaFX.vues;
 
 import fr.umontpellier.iut.trainsJavaFX.GestionJeu;
 import fr.umontpellier.iut.trainsJavaFX.IJeu;
+import fr.umontpellier.iut.trainsJavaFX.TrainsIHM;
 import javafx.beans.binding.DoubleBinding;
 import javafx.beans.property.IntegerProperty;
 import javafx.event.EventHandler;
@@ -10,6 +11,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 
 import java.io.IOException;
 import java.util.Map;
@@ -61,6 +64,9 @@ public class VueReserve extends VBox {
 
     EventHandler<MouseEvent> actionChoisirCarte = (mouseEvent -> {
         VueCarte vueCarte = (VueCarte) mouseEvent.getSource();
+        MediaPlayer argent = TrainsIHM.creerMusique("src/main/resources/musique/argent.mp3");
+        argent.setAutoPlay(true);
+        argent.play();
         GestionJeu.getJeu().uneCarteDeLaReserveEstAchetee(vueCarte.getCarte().getNom());
     });
 }
