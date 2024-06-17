@@ -1,14 +1,15 @@
 package fr.umontpellier.iut.trainsJavaFX.vues;
 
+import fr.umontpellier.iut.trainsJavaFX.GestionJeu;
+import fr.umontpellier.iut.trainsJavaFX.ICarte;
 import fr.umontpellier.iut.trainsJavaFX.IJeu;
-import javafx.beans.binding.DoubleBinding;
+import fr.umontpellier.iut.trainsJavaFX.TrainsIHM;
 import javafx.beans.binding.StringBinding;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+
 import java.io.IOException;
 
 /**
@@ -34,13 +35,18 @@ public class VueDuJeu extends BorderPane {
     @FXML
     private Label instruction;
     @FXML
+    private HBox topBox;
+    @FXML
     private Label nomJoueur;
     @FXML
     private VBox conteneurChoix;
     @FXML
     private FlowPane boxChoix;
+    @FXML
+    private Pane zoomCarte;
 
     public VueDuJeu(IJeu jeu) {
+        GestionJeu.setVueDuJeu(this);
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/jeu.fxml"));
             loader.setRoot(this);
@@ -52,34 +58,21 @@ public class VueDuJeu extends BorderPane {
         this.jeu = jeu;
     }
 
+    @FXML
+    private void initialize() {
+        TrainsIHM.chargerMusiques();
+        System.out.println("chargé!");
+        System.out.println(getChildren());
+        TrainsIHM.lancerMusique("train_aventure");
+    }
+
     public void creerBindings() {
         plateau.prefWidthProperty().bind(getScene().widthProperty());
         plateau.prefHeightProperty().bind(getScene().heightProperty());
         plateau.creerBindings();
         joueurCourant.creerBindings();
         autresJoueurs.creerBindings();
-        reserve.creerBindings();
         instruction.textProperty().bind(jeu.instructionProperty());
-        minHeightProperty().bind(new DoubleBinding() {
-            {
-                super.bind(bottomProperty(), leftProperty(), topProperty(), centerProperty(), rightProperty());
-            }
-            @Override
-            protected double computeValue() {
-                double taille = joueurCourant.heightProperty().get() + reserve.heightProperty().get() + nomJoueur.heightProperty().get();
-                return taille;
-            }
-        });/*
-        minWidthProperty().bind(new DoubleBinding() {
-            {
-                super.bind(bottomProperty(), leftProperty(), topProperty(), centerProperty(), rightProperty());
-            }
-            @Override
-            protected double computeValue() {
-                double taille = joueurCourant.widthProperty().get() + reserve.widthProperty().get() + nomJoueur.widthProperty().get();
-                return taille;
-            }
-        });*/
         nomJoueur.textProperty().bind(new StringBinding() {
             {
                 super.bind(jeu.joueurCourantProperty());
@@ -87,9 +80,17 @@ public class VueDuJeu extends BorderPane {
 
             @Override
             protected String computeValue() {
+                topBox.styleProperty().setValue("-fx-background-color: " + CouleursJoueurs.couleursBackgroundJoueur.get(jeu.joueurCourantProperty().getValue().getCouleur()));
                 return jeu.joueurCourantProperty().getValue().getNom();
             }
         });
+    }
+
+    public void setZoomCarte(ICarte carte) {
+        zoomCarte.getChildren().clear();
+        zoomCarte.setVisible(carte != null);
+        if(carte != null)
+            zoomCarte.getChildren().add(new VueCarte(carte, 0.5));
     }
 
     public VBox getConteneurChoix() {

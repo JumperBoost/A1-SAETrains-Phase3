@@ -20,16 +20,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-import java.io.*;
-
-import javafx.application.*;
-import javafx.beans.binding.*;
 import javafx.beans.property.*;
-import javafx.scene.*;
-import javafx.scene.layout.*;
 import javafx.scene.media.*;
-import javafx.scene.paint.*;
-import javafx.stage.*;
+import javafx.util.Duration;
 
 public class TrainsIHM extends Application {
     private VueChoixJoueurs vueChoixJoueurs;
@@ -61,8 +54,8 @@ public class TrainsIHM extends Application {
         VueOuverture ouverture = new VueOuverture();
         ouverture.creerBindings();
         Scene scene = new Scene(ouverture, Screen.getPrimary().getBounds().getWidth() * DonneesGraphiques.pourcentageEcran, Screen.getPrimary().getBounds().getHeight() * DonneesGraphiques.pourcentageEcran);
-        primaryStage.setMinWidth(Screen.getPrimary().getBounds().getWidth() / 2.5);
-        primaryStage.setMinHeight(Screen.getPrimary().getBounds().getHeight() / 2.5);
+        primaryStage.setMinWidth(1160);
+        primaryStage.setMinHeight(755);
         primaryStage.setMaxWidth(Screen.getPrimary().getBounds().getWidth());
         primaryStage.setMaxHeight(Screen.getPrimary().getBounds().getHeight());
 
@@ -98,6 +91,45 @@ public class TrainsIHM extends Application {
 
     }
 
+    public static void chargerMusiques() {
+        MediaPlayer train_aventure = new MediaPlayer(new Media(TrainsIHM.class.getClassLoader().getResource("musique/train_aventure.mp3").toExternalForm()));
+        train_aventure.setVolume(0.2);
+        train_aventure.setCycleCount(MediaPlayer.INDEFINITE);
+        MediaView train_aventure_view = new MediaView(train_aventure);
+        train_aventure_view.setId("sound_train_aventure");
+
+        MediaPlayer argent = new MediaPlayer(new Media(TrainsIHM.class.getClassLoader().getResource("musique/argent.mp3").toExternalForm()));
+        argent.setVolume(0.25);
+        MediaView argent_view = new MediaView(argent);
+        argent_view.setId("sound_argent");
+
+        MediaPlayer applaudissement = new MediaPlayer(new Media(TrainsIHM.class.getClassLoader().getResource("musique/applaudissement.mp3").toExternalForm()));
+        applaudissement.setVolume(0.2);
+        MediaView applaudissement_view = new MediaView(applaudissement);
+        applaudissement_view.setId("sound_applaudissement");
+
+        List<MediaView> mediaViewList = new ArrayList<>(List.of(train_aventure_view, argent_view, applaudissement_view));
+        mediaViewList.forEach(mediaView -> mediaView.getMediaPlayer().setOnEndOfMedia(() -> {
+            mediaView.getMediaPlayer().stop();
+            mediaView.getMediaPlayer().seek(Duration.ZERO);
+        }));
+        GestionJeu.getVueDuJeu().getChildren().addAll(mediaViewList);
+    }
+
+    public static void lancerMusique(String nom) {
+        MediaView mediaView = (MediaView) GestionJeu.getVueDuJeu().getChildren().stream().filter(c -> c instanceof MediaView && c.getId().equals("sound_" + nom)).findFirst().orElse(null);
+        if(mediaView != null)
+            mediaView.getMediaPlayer().play();
+    }
+
+    public static void arreterMusique(String nom) {
+        MediaView mediaView = (MediaView) GestionJeu.getVueDuJeu().getChildren().stream().filter(c -> c instanceof MediaView && c.getId().equals("sound_" + nom)).findFirst().orElse(null);
+        if(mediaView != null) {
+            mediaView.getMediaPlayer().stop();
+            mediaView.getMediaPlayer().seek(Duration.ZERO);
+        }
+    }
+
     public void demarrerPartie() {
 
         GestionJeu.setJeu(jeu);
@@ -105,14 +137,12 @@ public class TrainsIHM extends Application {
 
         Scene scene = new Scene(vueDuJeu, Screen.getPrimary().getBounds().getWidth() * DonneesGraphiques.pourcentageEcran, Screen.getPrimary().getBounds().getHeight() * DonneesGraphiques.pourcentageEcran); // la scene doit être créée avant de mettre en place les bindings
         vueDuJeu.creerBindings();
-        MediaPlayer musique = TrainsIHM.creerMusique("src/main/resources/musique/train_aventure.mp3");
-        vueDuJeu.getChildren().add(new MediaView(musique));
         jeu.run(); // le jeu doit être démarré après que les bindings ont été mis en place
 
         VueResultats vueResultats = new VueResultats(this);
         vueResultats.creerBinding();
-        primaryStage.setMinWidth(Screen.getPrimary().getBounds().getWidth() / 2.5);
-        primaryStage.setMinHeight(Screen.getPrimary().getBounds().getHeight() / 2.5);
+        primaryStage.setMinWidth(1160);
+        primaryStage.setMinHeight(755);
         primaryStage.setMaxWidth(Screen.getPrimary().getBounds().getWidth());
         primaryStage.setMaxHeight(Screen.getPrimary().getBounds().getHeight());
 
@@ -123,13 +153,6 @@ public class TrainsIHM extends Application {
             this.arreterJeu();
             event.consume();
         });
-        musique.setAutoPlay(true);
-
-        musique.setCycleCount(MediaPlayer.INDEFINITE);
-        musique.play();
-
-
-
     }
 
     private final ListChangeListener<String> quandLesNomsJoueursSontDefinis = change -> {
@@ -153,13 +176,6 @@ public class TrainsIHM extends Application {
 
     public Stage getPrimaryStage() {
         return primaryStage;
-    }
-
-    public static MediaPlayer creerMusique(String path){
-        Media media = new Media(new File(path).toURI().toString());
-        MediaPlayer mediaPlayer = new MediaPlayer(media);
-
-        return mediaPlayer;
     }
 
     public static void main(String[] args) {
