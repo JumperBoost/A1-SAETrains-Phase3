@@ -3,17 +3,10 @@ package fr.umontpellier.iut.trainsJavaFX.vues;
 import fr.umontpellier.iut.trainsJavaFX.IJoueur;
 import fr.umontpellier.iut.trainsJavaFX.TrainsIHM;
 import javafx.application.Platform;
-import javafx.beans.property.BooleanProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.ListChangeListener;
-import javafx.event.EventHandler;
-import javafx.event.EventType;
 import javafx.scene.control.Alert;
 import javafx.scene.layout.Pane;
-import javafx.scene.media.MediaPlayer;
-import javafx.scene.media.MediaView;
-import javafx.scene.text.Text;
 
 import java.util.*;
 
@@ -60,9 +53,8 @@ public class VueResultats extends Pane {
             podium++;
         }
         alert.setContentText(texte);
-        MediaPlayer applaudissement = TrainsIHM.creerMusique("src/main/resources/musique/applaudissement.mp3");
-        getChildren().add(new MediaView(applaudissement));
-        applaudissement.play();
+        TrainsIHM.arreterMusique("train_aventure");
+        TrainsIHM.lancerMusique("applaudissement");
         alert.showAndWait();
         Platform.exit();
     }

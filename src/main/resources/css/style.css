@@ -16,6 +16,10 @@ Button {
     -fx-background-color: transparent;
 }
 
+VueAutresJoueurs, VueReserve {
+    -fx-background-color: rgba(128, 128, 128, 0.5);
+}
+
 /**
  * Header
  */
@@ -71,21 +75,16 @@ VueCarte {
     -fx-border-width: 1;
 }
 
+#conteneurChoix, #zoomCarte {
+    visibility: false;
+}
+
 #conteneurChoix {
     -fx-background-color: rgb(128, 128, 128, 0.75);
     -fx-spacing: 20;
-    visibility: false;
 }
 
 #conteneurChoix > Label {
     -fx-text-fill: red;
     -fx-font-size: 36;
-}
-
-/**
- * vueAutresJoueurs
- */
-
-VueAutresJoueurs {
-    -fx-background-color: rgba(128, 128, 128, 0.52);
 }

@@ -1,5 +1,6 @@
 package fr.umontpellier.iut.trainsJavaFX.vues;
 
+import fr.umontpellier.iut.trainsJavaFX.GestionJeu;
 import fr.umontpellier.iut.trainsJavaFX.ICarte;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.IntegerProperty;
@@ -20,7 +21,7 @@ import java.text.Normalizer;
  */
 public class VueCarte extends StackPane {
 
-    private final ICarte carte;
+    private ICarte carte;
     private final ImageView imageView;
 
     public VueCarte(ICarte carte, double ratioRedimensionnage) {
@@ -30,6 +31,8 @@ public class VueCarte extends StackPane {
                 .getResource("images/cartes/" + nomCarte + ".jpg")));
         imageView.setFitWidth(imageView.getImage().getWidth() * ratioRedimensionnage);
         imageView.setFitHeight(imageView.getImage().getHeight() * ratioRedimensionnage);
+        setOnMouseEntered(actionSourisEntrer);
+        setOnMouseExited(actionSourisSortir);
         getChildren().add(imageView);
     }
 
@@ -68,5 +71,9 @@ public class VueCarte extends StackPane {
     public ImageView getImageView() {
         return imageView;
     }
+
+    private EventHandler<MouseEvent> actionSourisEntrer = (mouseEvent -> GestionJeu.getVueDuJeu().setZoomCarte(carte));
+
+    private EventHandler<MouseEvent> actionSourisSortir = (mouseEvent -> GestionJeu.getVueDuJeu().setZoomCarte(null));
 
 }
